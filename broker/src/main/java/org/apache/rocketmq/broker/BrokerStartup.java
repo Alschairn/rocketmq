@@ -142,6 +142,9 @@ public class BrokerStartup {
 
             MixAll.properties2Object(ServerUtil.commandLine2Properties(commandLine), brokerConfig);
 
+            // // FIXME: 2019/10/30 设置启动变量
+            brokerConfig.setRocketmqHome("/Users/hongshengjie/Downloads/code/github/rocketmq");
+
             if (null == brokerConfig.getRocketmqHome()) {
                 System.out.printf("Please set the %s variable in your environment to match the location of the RocketMQ installation", MixAll.ROCKETMQ_HOME_ENV);
                 System.exit(-2);
