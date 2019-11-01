@@ -227,15 +227,29 @@ public class BrokerController {
         return queryThreadPoolQueue;
     }
 
+    /**
+     * Broker启动之后初始化控制器
+     *
+     * @return
+     * @throws CloneNotSupportedException
+     */
     public boolean initialize() throws CloneNotSupportedException {
+        // 管理broker中存储的所有topic的配置
         boolean result = this.topicConfigManager.load();
 
+        // 管理Consumer的消费进度
         result = result && this.consumerOffsetManager.load();
+
+        // 管理订阅组，包括订阅权限等
         result = result && this.subscriptionGroupManager.load();
+
         result = result && this.consumerFilterManager.load();
 
+        // 初始化消息存储
         if (result) {
             try {
+
+                // 用于broker层的消息落地存储
                 this.messageStore =
                     new DefaultMessageStore(this.messageStoreConfig, this.brokerStatsManager, this.messageArrivingListener,
                         this.brokerConfig);
@@ -254,6 +268,7 @@ public class BrokerController {
             }
         }
 
+        // 这里似乎是判断消息存储是否加载成功
         result = result && this.messageStore.load();
 
         if (result) {
