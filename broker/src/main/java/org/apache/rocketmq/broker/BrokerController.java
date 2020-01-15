@@ -274,6 +274,7 @@ public class BrokerController {
         if (result) {
             this.remotingServer = new NettyRemotingServer(this.nettyServerConfig, this.clientHousekeepingService);
             NettyServerConfig fastConfig = (NettyServerConfig) this.nettyServerConfig.clone();
+            // 端口8886 ？
             fastConfig.setListenPort(nettyServerConfig.getListenPort() - 2);
             this.fastRemotingServer = new NettyRemotingServer(fastConfig, this.clientHousekeepingService);
             this.sendMessageExecutor = new BrokerFixedThreadPoolExecutor(
@@ -682,7 +683,7 @@ public class BrokerController {
         return messageStore;
     }
 
-    public void setMessageStore(MessageStore messageStore) {
+    public void £setMessageStore(MessageStore messageStore) {
         this.messageStore = messageStore;
     }
 
@@ -1232,5 +1233,6 @@ public class BrokerController {
     }
 
 
-
+    public void setMessageStore(MessageStore messageStore) {
+    }
 }

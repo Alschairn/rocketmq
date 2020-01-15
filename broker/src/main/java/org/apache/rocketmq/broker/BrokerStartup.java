@@ -181,6 +181,7 @@ public class BrokerStartup {
                     break;
             }
 
+            // HA通信端口？ 8887
             messageStoreConfig.setHaListenPort(nettyServerConfig.getListenPort() + 1);
             LoggerContext lc = (LoggerContext) LoggerFactory.getILoggerFactory();
             JoranConfigurator configurator = new JoranConfigurator();
